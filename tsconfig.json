@@ -10,6 +10,7 @@
     "types": [
       "node"
     ],
+    "sourceMap": true,
     "typeRoots": [
       "node_modules/@types"
     ]

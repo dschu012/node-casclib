@@ -43,7 +43,7 @@ vector<unique_ptr<FindResult>> FindFiles(HANDLE storageHandle, const char* searc
     }
 
     do {
-        unique_ptr<FindResult> result(new FindResult(findData.szFileName, findData.szPlainName, findData.dwFileSize));
+        unique_ptr<FindResult> result(new FindResult(findData.szFileName, findData.szPlainName, findData.FileSize));
         results.push_back(move(result));
     }
     while(CascFindNextFile(searchHandle, &findData));

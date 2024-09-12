@@ -9,6 +9,7 @@ using namespace std;
 using namespace storageinfo;
 
 const char* storageinfo::GameName(const DWORD gameData) {
+    /*
     switch(gameData & CASC_GAME_MASK) {
         case CASC_GAME_HOTS:
             return gameHeroes;
@@ -25,11 +26,14 @@ const char* storageinfo::GameName(const DWORD gameData) {
         default:
             return gameUnknown;
     }
+    */
+    return gameUnknown;
 }
 
 Napi::Value storageinfo::GetCascStorageInfo(const Napi::CallbackInfo& info) {
     Napi::Env env = info.Env();
 
+    
     if(info.Length() < 1) {
       errors::ThrowJavascriptTypeError(env, "Wrong number of arguments");
       return env.Null();
@@ -41,10 +45,10 @@ Napi::Value storageinfo::GetCascStorageInfo(const Napi::CallbackInfo& info) {
     }
 
     Napi::Object storageInfo = Napi::Object::New(env);
+    /*
     HANDLE hStorage = (HANDLE)info[0].As<Napi::External<void>>().Data();
     DWORD data = 0;
-
-    if(!CascGetStorageInfo(hStorage, CascStorageFileCount, &data, sizeof(data), NULL)) {
+    if(!CascGetStorageInfo(hStorage, CascStorageTotalFileCount, &data, sizeof(data), NULL)) {
         errors::ThrowJavascriptErrorWithLastError(env, "Failed to read storage information.");
         return env.Null();
     }
@@ -54,7 +58,7 @@ Napi::Value storageinfo::GetCascStorageInfo(const Napi::CallbackInfo& info) {
         Napi::Number::New(env, data)
     );
 
-    if(!CascGetStorageInfo(hStorage, CascStorageGameInfo, &data, sizeof(data), NULL)) {
+    if(!CascGetStorageInfo(hStorage, CascStorageProduct, &data, sizeof(data), NULL)) {
         errors::ThrowJavascriptErrorWithLastError(env, "Failed to read storage information.");
         return env.Null();
     }
@@ -63,7 +67,7 @@ Napi::Value storageinfo::GetCascStorageInfo(const Napi::CallbackInfo& info) {
         Napi::String::New(env, GameName(data))
     );
 
-    if(!CascGetStorageInfo(hStorage, CascStorageGameBuild, &data, sizeof(data), NULL)) {
+    if(!CascGetStorageInfo(hStorage, CascStorageProduct, &data, sizeof(data), NULL)) {
         errors::ThrowJavascriptErrorWithLastError(env, "Failed to read storage information.");
         return env.Null();
     }
@@ -80,7 +84,7 @@ Napi::Value storageinfo::GetCascStorageInfo(const Napi::CallbackInfo& info) {
         Napi::String::New(env, "installedLocales"),
         Napi::Number::New(env, data)
     );
-
+    */
     return storageInfo;
 }
 
